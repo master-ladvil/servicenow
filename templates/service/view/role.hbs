@@ -1,0 +1,21 @@
+        <table class="table table-bordered table-striped table-hover table-sm">
+            <thead class="thead">
+                <tr>
+                    <th>
+                    <td>Id</td>
+                    </th>
+                    <th>
+                    <td>Role</td>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+               {{#each this.model as |profile|}}
+                    <tr>
+                        <td>{{profile.id}}</td>
+                        <td>{{profile.name}}</td>
+                    </tr>
+               {{/each}} 
+            </tbody>
+            </table>
+{{outlet}}

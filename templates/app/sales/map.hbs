@@ -1,0 +1,38 @@
+
+
+<table class="table">
+    <th>
+    <td>Db</td>
+    </th>
+    <th>
+    <td>Sf</td>
+    </th>
+
+    <tbody id = "map">
+        {{#each this.model.map as |row|}}
+        <tr>
+            <td>
+                <select class = "dbselect">
+                    <option value = {{row.dbattrname}} selected>{{row.dbattrname}}</option>
+                    {{#each this.model.db as |mp|}}
+                        <option value = {{mp.attrname}}>{{mp.attrname}}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td>
+                <select class = "sfselect">
+                    <option value = {{row.attrname}} selected>{{row.attrname}}</option>
+                    {{#each this.model.sf as |mp|}}
+                        <option value = {{mp.attrname}}>{{mp.attrname}}</option>
+                    {{/each}}
+                </select>
+            </td>
+            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<button class = "btn btn-sm btn-primary" type="button" {{action "submit"}}>Submit</button>
+<button class = "btn btn-success btn-sm" onclick = {{action "get"}} type="button">Add another</button>
+<button class="btn btn-sm btn-danger" onclick = {{action "flush"}} type="button">Flush</button>
+{{outlet}}
