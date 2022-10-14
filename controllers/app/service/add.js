@@ -50,7 +50,7 @@ export default class AppServiceAddController extends Controller {
   }
   @action
   get() {
-    var name = document.getElementById('name').value;
+    var name = document.getElementById('addrolename').value;
     var desc = document.getElementById('description').value;
     console.log(name);
 

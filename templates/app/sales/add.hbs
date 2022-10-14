@@ -69,8 +69,8 @@
                     <td><b>ProfileId</b></td>
                     <td>
                        <select class="custom-select my-1 mr-sm-2" id="profileid">
-                                {{#each this.model.user as |profile|}}
-                                    <option value = {{profile.id}}>{{profile.profilename}}</option>
+                                {{#each this.model.profile as |profile|}}
+                                    <option value = {{profile.id}}>{{profile.perm}}</option>
                                 {{/each}}
                             </select>
                     </td>
