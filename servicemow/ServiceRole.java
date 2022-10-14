@@ -37,11 +37,12 @@ public class ServiceRole extends HttpServlet {
         try {
             String name = request.getParameter("name");
             String desc = request.getParameter("desc");
-
+            System.out.println("name -> "+name);
             // creating json
             JSONObject job = new JSONObject();
             job.put("name", name);
             job.put("description", desc);
+            System.out.println("Role object ------>" + job);
             // send it to servicenow
             String url = "https://dev100506.service-now.com/api/now/table/sys_user_role";
             URL uri = new URL(url);

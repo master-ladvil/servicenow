@@ -33,6 +33,7 @@ public class ServiceSync extends HttpServlet {
             int responseCode = con.getResponseCode();
             System.out.println(responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK) {
+                System.out.println("inside if");
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         con.getInputStream()));
                 String inputLine;
@@ -41,11 +42,15 @@ public class ServiceSync extends HttpServlet {
                 while ((inputLine = in.readLine()) != null) {
                     res.append(inputLine);
                 }
-                in.close();
+                System.out.println(res.toString());
+                in.close(); System.out.println("finished input");
                 JSONParser parser = new JSONParser();
                 JSONObject ob = (JSONObject) parser.parse(res.toString());
+                System.out.println(ob);
                 List<JSONObject> users = (List<JSONObject>) ob.get("result");
+                System.out.println("deleting");
                 sdb.deldb();
+                System.out.println("db");
                 for (int i = 0; i < users.size(); i++) {
                     JSONObject job = users.get(i);
                     sdb.addtodb(job);

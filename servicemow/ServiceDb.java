@@ -11,10 +11,9 @@ import java.text.*;
 
 public class ServiceDb {
     public static Connection con;
-
     public ServiceDb() {
         try {
-            System.out.println("[+]inside getuser constructor..");
+            Logs.addlog("[+]inside ServiceDb constructor..");
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/elloauth", "postgres", "pwd");
             if (con != null) {
@@ -143,7 +142,7 @@ public class ServiceDb {
         Statement stmt;
         ResultSet rs = null;
         try {
-            String query = String.format("select * from serviceattr where source = '1';");
+            String query = String.format("select * from attributes where source = '3';");
             System.out.println("Query -> " + query);
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
@@ -159,7 +158,7 @@ public class ServiceDb {
         Statement stmt;
         ResultSet rs = null;
         try {
-            String query = String.format("select * from serviceattr where source = '2';");
+            String query = String.format("select * from attributes where source = '4';");
             System.out.println("Query -> " + query);
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
@@ -174,7 +173,7 @@ public class ServiceDb {
     public String getAttributeValue(String id) throws Exception {
         Statement stmt;
         ResultSet rs = null;
-        String query = String.format("select attrname from serviceattr where id = '%s';", id);
+        String query = String.format("select attrname from attributes where id = '%s';", id);
         System.out.println("Query -> " + query);
         stmt = con.createStatement();
         rs = stmt.executeQuery(query);
@@ -187,7 +186,7 @@ public class ServiceDb {
         Statement stmt;
         ResultSet rs = null;
         try {
-            String query = String.format("select * from servicemap");
+            String query = String.format("select * from maps where app = '2';");
             System.out.println("Query -> " + query);
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
@@ -202,7 +201,7 @@ public class ServiceDb {
     public void delmap() {
         Statement stmt;
         try {
-            String query = String.format("delete from servicemap;");
+            String query = String.format("delete from maps where app = '2';");
             System.out.println("Query -> " + query);
             stmt = con.createStatement();
             stmt.executeUpdate(query);
@@ -217,8 +216,8 @@ public class ServiceDb {
         Statement stmt;
         ResultSet rs = null;
         try {
-            String sfquery = String.format("select id from serviceattr where attrname = '%s' and source = '1';", m11);
-            String dbquery = String.format("select id from serviceattr where attrname = '%s' and source = '2';", m22);
+            String sfquery = String.format("select id from attributes where attrname = '%s' and source = '3';", m11);
+            String dbquery = String.format("select id from attributes where attrname = '%s' and source = '4';", m22);
             String sfid;
             stmt = con.createStatement();
             rs = stmt.executeQuery(sfquery);
@@ -230,7 +229,7 @@ public class ServiceDb {
             rs.next();
             String dbid = rs.getString("id");
             System.out.println("dbid -> " + dbid);
-            String query = String.format("insert into servicemap(map1,map2) values('%s','%s');", sfid, dbid);
+            String query = String.format("insert into maps(map1,map2,app) values('%s','%s','%s');", sfid, dbid,"2");
             System.out.println("Query -> " + query);
             stmt = con.createStatement();
             stmt.executeUpdate(query);
